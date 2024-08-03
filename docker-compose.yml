@@ -1,4 +1,3 @@
-version: '3'
 networks:
     internal:
 
@@ -12,7 +11,7 @@ services:
         image: nginx:stable-alpine
         container_name: nginx
         ports:
-            - 80:80
+            - "80:80"
         volumes:
             - ./dev:/var/www
             - ./config/nginx:/etc/nginx/conf.d
@@ -62,18 +61,21 @@ services:
         volumes:
           - ./dev:/var/www
           - ./config/php/php.ini:/usr/local/etc/php/php.ini
+          - ./config/supervisor/supervisord.conf:/etc/supervisor/supervisord.conf
+          - ./logs/supervisor:/var/log/supervisor/
         ports:
-          - 9000:9000
+          - "9000:9000"
         networks:
           - internal
+        command: ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
         volumes_from:
-            - tmp  
+            - tmp
     postgres:
         image: postgres:latest
         container_name: postgres
         command: "postgres -c fsync=off -c full_page_writes=off -c synchronous_commit=OFF"
         ports:
-            - 5432:5432
+            - "5432:5432"
         volumes:
             - ./database/postgres:/data/postgres
         networks:

@@ -15,9 +15,10 @@ RUN set -ex \
     libtool \
     curl \
     wget \
-    bash
+    bash \
+    supervisor
 
-RUN docker-php-ext-install pdo opcache zip mysqli pdo_mysql
+RUN docker-php-ext-install pdo opcache zip
 
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pgsql pdo_pgsql
@@ -41,6 +42,11 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
+
+RUN mkdir -p /var/log/supervisor
+
+# COPY supervisord.conf /etc/supervisord.conf
+# COPY messenger-worker.ini /etc/supervisor/conf.d/messenger-worker.ini
 
 WORKDIR /var/www/project
 
