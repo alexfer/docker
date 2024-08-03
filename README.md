@@ -5,6 +5,7 @@ Creating and deploying postgres database
 > [!IMPORTANT]
 >  In the docker directory go over:
 #### Make rhe followings command:
+
 ```shell
 $ cd dev/projects/
 $ git clone git@github.com:alexfer/rgfly.git
