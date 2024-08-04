@@ -4,7 +4,7 @@ Creating and deploying postgres database
 ============
 > [!IMPORTANT]
 >  In the docker directory go over:
-#### Make rhe followings command:
+### Deploy source code
 
 ```shell
 $ cd dev/projects/
@@ -14,6 +14,14 @@ $ composer install
 $ npm install
 $ npm run dev --watch
 ````
+### Deploy Websocket server
+```shell
+$ cd dev/projects/
+$ git clone git@github.com:alexfer/nodejs.git
+$ cd nodejs
+$ npm install
+````
+
 ### Build docker
 #### Run following commands and fill .env file:
 ````shell
