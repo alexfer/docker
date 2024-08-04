@@ -6,7 +6,6 @@ RUN mkdir -p /var/www/project/nodejs
 WORKDIR /var/www/project/nodejs
 COPY package.json .
 RUN npm install
-
 COPY . .
 
 EXPOSE 8443

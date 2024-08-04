@@ -12,6 +12,7 @@ services:
         container_name: nginx
         ports:
             - 80:80
+        restart: unless-stopped
         volumes:
             - ./dev:/var/www
             - ./config/nginx-server/nginx.conf:/etc/nginx/nginx.conf
@@ -25,6 +26,7 @@ services:
         image: redis
         command: redis-server /etc/redis.conf
         container_name: redis
+        restart: unless-stopped
         volumes:
             - ./config/redis/redis.conf:/etc/redis.conf
             - ./database/redis:/data
@@ -37,6 +39,7 @@ services:
             dockerfile: Dockerfile
         ports:
             - 8443:8443
+        restart: unless-stopped
         volumes:
             - ./dev:/var/www
             - ./dev/project/nodejs:/var/www/project/nodejs
@@ -45,9 +48,12 @@ services:
             - internal
         depends_on:
             - redis
+        volumes_from:
+            - tmp
     elasticsearch:
         image: elasticsearch:8.8.0  
-        container_name: elasticsearch     
+        container_name: elasticsearch
+        restart: unless-stopped
         ports:
             - 9200:9200
         environment:
@@ -89,6 +95,7 @@ services:
         image: postgres:latest
         container_name: postgres
         command: "postgres -c fsync=off -c full_page_writes=off -c synchronous_commit=OFF"
+        restart: on-failure
         ports:
             - "5432:5432"
         volumes:
