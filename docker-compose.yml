@@ -1,6 +1,6 @@
+name: 'rgfly-v1'
 networks:
     internal:
-
 services:
     tmp:
         image: busybox
@@ -11,9 +11,10 @@ services:
         image: nginx:stable-alpine
         container_name: nginx
         ports:
-            - "80:80"
+            - 80:80
         volumes:
             - ./dev:/var/www
+            - ./config/nginx-server/nginx.conf:/etc/nginx/nginx.conf
             - ./config/nginx:/etc/nginx/conf.d
             - ./logs/nginx:/var/log/nginx/
         depends_on:
@@ -28,13 +29,27 @@ services:
             - ./config/redis/redis.conf:/etc/redis.conf
             - ./database/redis:/data
         volumes_from:
-            - tmp    
+            - tmp
+    nodejs:
+        container_name: node-notifications
+        build:
+            context: ./config/node
+            dockerfile: Dockerfile
+        ports:
+            - 8443:8443
+        volumes:
+            - ./dev:/var/www
+            - ./dev/project/nodejs:/var/www/project/nodejs
+            - ./config/node/package.json:/var/www/project/nodejs/package.json
+        networks:
+            - internal
+        depends_on:
+            - redis
     elasticsearch:
         image: elasticsearch:8.8.0  
         container_name: elasticsearch     
         ports:
             - 9200:9200
-            #- 9300:9300
         environment:
             - discovery.type=single-node
             - bootstrap.memory_lock=true

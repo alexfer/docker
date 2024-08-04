@@ -1,0 +1,16 @@
+{
+  "name": "notification-server",
+  "version": "1.0.0",
+  "description": "Node socket server communication between Redis & Symfony",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --env-file=.env index.js"
+  },
+  "author": "Alexander Sh",
+  "license": "MIT",
+  "dependencies": {
+    "redis": "^4.7.0",
+    "ws": "^8.18.0",
+    "wscat": "^5.2.1"
+  }
+}
