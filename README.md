@@ -36,7 +36,7 @@ $ docker-compose up -d --build
 Login to postgres container:
 ````shell
 $ docker exec -it postgres sh
-plsql -U postgres
+psql -U postgres
 ````
 Next step:
 ````sql
@@ -48,14 +48,18 @@ CREATE DATABASE rgfly OWNER rgfly;
 GRANT ALL PRIVILEGES ON DATABASE rgfly TO rgfly;
 ````
 Deploy database:
-````
-$ docker exec -it bash
+````shell
+$ docker exec -it php bash
 $ cd rgfly
-$ rm -rfv src/Migrations/migrations/*
-$ touch src/Migrations/.gitkeep
+$ rm -rfv src/Migrations/*
 $ php bin/console doctrine:database:drop --if-exists --force
 $ php bin/console doctrine:database:create
 $ php bin/console make:migration --no-interaction
 $ php bin/console doctrine:migrations:migrate --no-interaction
 $ php bin/console doctrine:fixtures:load --no-interaction
+$ php bin/console app:functions:import --no-interaction
+````
+Clear database Redis:
+````shell
+docker exec -it redis redis-cli FLUSHALL
 ````
