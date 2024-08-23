@@ -40,10 +40,9 @@ RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN curl -sS https://get.symfony.com/cli/installer | bash
-RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony
-
 RUN mkdir -p /var/log/supervisor
+
+RUN crontab /var/www/project/rgfly/cron/crontab.txt
 
 # COPY supervisord.conf /etc/supervisord.conf
 # COPY messenger-worker.ini /etc/supervisor/conf.d/messenger-worker.ini

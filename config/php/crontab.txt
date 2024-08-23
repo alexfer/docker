@@ -1,0 +1,1 @@
+0 0 * * * /usr/local/bin/php /var/www/project/rgfly/bin/console app:cleanup >> /var/www/project/rgfly/var/log/cleanup.log 2>&1
