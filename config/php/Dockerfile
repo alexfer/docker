@@ -42,7 +42,8 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 
 RUN mkdir -p /var/log/supervisor
 
-RUN crontab /var/www/project/rgfly/cron/crontab.txt
+COPY crontab.txt /var/www/crontab.txt
+RUN crontab /var/www/crontab.txt
 
 # COPY supervisord.conf /etc/supervisord.conf
 # COPY messenger-worker.ini /etc/supervisor/conf.d/messenger-worker.ini
