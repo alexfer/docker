@@ -7,7 +7,7 @@ Creating and deploying postgres database
 ### Deploy source code
 
 ```shell
-$ cd dev/projects/
+$ cd dev/project/
 $ git clone git@github.com:alexfer/rgfly.git
 $ cd rgfly
 $ composer install
@@ -16,7 +16,7 @@ $ npm run dev --watch
 ````
 ### Deploy Websocket server
 ```shell
-$ cd dev/projects/
+$ cd dev/project/
 $ git clone git@github.com:alexfer/nodejs.git
 $ cd nodejs
 $ npm install
