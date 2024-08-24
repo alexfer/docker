@@ -10,6 +10,7 @@ Creating and deploying postgres database
 $ cd dev/project/
 $ git clone git@github.com:alexfer/rgfly.git
 $ cd rgfly
+$ cp .env.dist .env # configure symfony
 $ composer install
 $ npm install
 $ npm run dev --watch
