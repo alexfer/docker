@@ -10,7 +10,7 @@ Creating and deploying postgres database
 $ cd dev/project/
 $ git clone git@github.com:alexfer/rgfly.git
 $ cd rgfly
-$ cp .env.dist .env # configure symfony
+$ cp .env.dist .env # symfony configuration
 $ composer install
 $ npm install
 $ npm run dev --watch
@@ -20,6 +20,7 @@ $ npm run dev --watch
 $ cd dev/project/
 $ git clone git@github.com:alexfer/nodejs.git
 $ cd nodejs
+$ cp .env.dist .env # node configuration
 $ npm install
 ````
 
