@@ -1,0 +1,6 @@
+2024/08/24 04:43:01 [crit] 22#22: *4 realpath() "/var/www/project/example/public" failed (2: No such file or directory), client: 192.168.65.1, server: example.local, request: "GET / HTTP/1.1", host: "rgfly.local"
+2024/08/24 04:43:02 [crit] 21#21: *2 realpath() "/var/www/project/example/public" failed (2: No such file or directory), client: 192.168.65.1, server: example.local, request: "GET /favicon.ico HTTP/1.1", host: "rgfly.local", referrer: "http://rgfly.local/"
+2024/08/24 04:43:09 [crit] 25#25: *9 realpath() "/var/www/project/example/public" failed (2: No such file or directory), client: 192.168.65.1, server: example.local, request: "GET / HTTP/1.1", host: "rgfly.local"
+2024/08/24 04:49:45 [crit] 26#26: *11 realpath() "/var/www/project/example/public" failed (2: No such file or directory), client: 192.168.65.1, server: example.local, request: "GET / HTTP/1.1", host: "rgfly.local"
+2024/08/24 05:05:11 [crit] 19#19: *1 realpath() "/var/www/project/example/public" failed (2: No such file or directory), client: 192.168.65.1, server: example.local, request: "GET / HTTP/1.1", host: "rgfly.local"
+2024/08/24 05:07:48 [crit] 20#20: *3 realpath() "/var/www/project/example/public" failed (2: No such file or directory), client: 192.168.65.1, server: example.local, request: "GET / HTTP/1.1", host: "rgfly.local"

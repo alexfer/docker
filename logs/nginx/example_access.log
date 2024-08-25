@@ -1,0 +1,6 @@
+192.168.65.1 - - [24/Aug/2024:04:43:01 +0000] "GET / HTTP/1.1" 404 27 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:129.0) Gecko/20100101 Firefox/129.0"
+192.168.65.1 - - [24/Aug/2024:04:43:02 +0000] "GET /favicon.ico HTTP/1.1" 404 27 "http://rgfly.local/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:129.0) Gecko/20100101 Firefox/129.0"
+192.168.65.1 - - [24/Aug/2024:04:43:09 +0000] "GET / HTTP/1.1" 404 27 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:129.0) Gecko/20100101 Firefox/129.0"
+192.168.65.1 - - [24/Aug/2024:04:49:45 +0000] "GET / HTTP/1.1" 404 27 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:129.0) Gecko/20100101 Firefox/129.0"
+192.168.65.1 - - [24/Aug/2024:05:05:11 +0000] "GET / HTTP/1.1" 404 27 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:129.0) Gecko/20100101 Firefox/129.0"
+192.168.65.1 - - [24/Aug/2024:05:07:48 +0000] "GET / HTTP/1.1" 404 27 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:129.0) Gecko/20100101 Firefox/129.0"
