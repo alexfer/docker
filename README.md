@@ -34,6 +34,10 @@ $ cd docker
 $ cp .env.dist .env
 $ docker-compose up -d --build
 ````
+### Clear logs
+````shell
+./clear-logs.sh
+````
 ### Create database & grant privileges to database
 Login to postgres container:
 ````shell
@@ -42,7 +46,7 @@ psql -U postgres
 ````
 Next step:
 ````sql
-DROP ROLE IF EXISTS rgfly;
+DROP ROLE IF EXISTS rgfly; -- optional
 CREATE USER rgfly WITH password 'rgfly';
 ALTER USER rgfly WITH SUPERUSER;
 ALTER USER rgfly CREATEDB;
@@ -53,10 +57,10 @@ Deploy database:
 ````shell
 $ docker exec -it php bash
 $ cd rgfly
-$ rm -rfv src/Migrations/*
-$ php bin/console doctrine:database:drop --if-exists --force
-$ php bin/console doctrine:database:create
-$ php bin/console make:migration --no-interaction
+$ rm -rfv src/Migrations/* # optional
+$ php bin/console doctrine:database:drop --if-exists --force # optional
+$ php bin/console doctrine:database:create # optional
+$ php bin/console make:migration --no-interaction # optional
 $ php bin/console doctrine:migrations:migrate --no-interaction
 $ php bin/console doctrine:fixtures:load --no-interaction
 $ php bin/console app:functions:import --no-interaction
