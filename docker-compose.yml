@@ -75,7 +75,8 @@ services:
         build:
             context: ./config/php
             dockerfile: Dockerfile
-        container_name: php            
+        container_name: php
+        restart: always
         depends_on:
             - redis
             - postgres
