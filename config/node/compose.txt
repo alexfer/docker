@@ -1,0 +1,18 @@
+nodejs:
+    container_name: node-notifications
+    build:
+        context: ./config/node
+        dockerfile: Dockerfile
+    ports:
+        - "8443:8443"
+    restart: unless-stopped
+    volumes:
+        - ./dev:/var/www
+        - ./dev/project/nodejs:/var/www/project/nodejs
+        - ./config/node/package.json:/var/www/project/nodejs/package.json
+    networks:
+        - internal
+    depends_on:
+        - redis
+    volumes_from:
+        - tmp
