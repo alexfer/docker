@@ -11,6 +11,7 @@ services:
     mercure:
         container_name: mercure
         image: dunglas/mercure
+        restart: unless-stopped
         environment:
             MERCURE_PUBLISHER_JWT_KEY: ${MERCURE_SECRET_KEY}
             MERCURE_SUBSCRIBER_JWT_KEY: ${MERCURE_SECRET_KEY}
