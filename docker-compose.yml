@@ -1,11 +1,17 @@
+version: '3.8'
+
 name: 'rgfly-v1'
 networks:
     internal:
+    frontend:
+    backend:
 services:
     tmp:
         image: busybox
         container_name: busybox
         command: chmod -R 777 /tmp/docker
+        networks:
+            - internal
         volumes:
             - /tmp/docker/
     mercure:
@@ -29,6 +35,7 @@ services:
             - mercure_config:/config
         networks:
             - internal
+            - frontend
         healthcheck:
             test: [ "CMD", "curl", "-f", "http://localhost:8080/.well-known/mercure" ]
             interval: 30s
@@ -49,7 +56,7 @@ services:
         depends_on:
             - php
         networks:
-            - internal
+            - frontend
         healthcheck:
             test: [ "CMD", "curl", "-f", "http://localhost/nginx_status" ]
             interval: 30s
@@ -60,6 +67,8 @@ services:
         command: redis-server /etc/redis.conf
         container_name: redis
         restart: unless-stopped
+        networks:
+            - backend
         volumes:
             - ./config/redis/redis.conf:/etc/redis.conf
             - ./database/redis:/data
@@ -89,7 +98,7 @@ services:
             - php
             - postgres
         networks:
-            - internal
+            - backend
         healthcheck:
             test: [ "CMD", "curl", "-f", "http://localhost:9200/_cluster/health" ]
             interval: 30s
@@ -113,7 +122,8 @@ services:
         ports:
           - "9000:9000"
         networks:
-          - internal
+          - backend
+          - frontend
         command: ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]
         volumes_from:
             - tmp
@@ -135,9 +145,9 @@ services:
         volumes:
             - pgdata:/var/lib/postgresql/data
         networks:
-            - internal 
+            - backend
         environment:
-            POSTGRES_HOST: localhost   
+            POSTGRES_HOST: localhost
             POSTGRES_HOST_AUTH_METHOD: trust
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
             POSTGRES_USER: ${POSTGRES_USER}
@@ -148,12 +158,12 @@ services:
             timeout: 10s
             retries: 3
 volumes:
-    pgdata:
-    mercure_data:
-    mercure_config:
-    tmp_data:
-    redis_config:
-    redis_data:
-    elastic_config:
-    elastic_data:
-    elastic_logs:
+  pgdata:
+  mercure_data:
+  mercure_config:
+  tmp_data:
+  redis_config:
+  redis_data:
+  elastic_config:
+  elastic_data:
+  elastic_logs:
