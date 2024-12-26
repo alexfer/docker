@@ -15,6 +15,9 @@ RUN set -ex \
     libtool \
     curl \
     wget \
+    weasyprint \
+    fontconfig \
+    ttf-dejavu \
     bash \
     supervisor
 
