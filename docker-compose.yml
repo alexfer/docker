@@ -1,6 +1,6 @@
 version: '3.8'
 
-name: 'rgfly-v1'
+name: 'inno-v1'
 networks:
     internal:
     frontend:

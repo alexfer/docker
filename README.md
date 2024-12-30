@@ -8,22 +8,13 @@ Creating and deploying postgres database
 
 ```shell
 $ cd dev/project/
-$ git clone git@github.com:alexfer/rgfly.git
+$ git clone git@github.com:alexfer/inno.git
 $ cd rgfly
 $ cp .env.dist .env # symfony configuration
 $ composer install
 $ npm install
 $ npm run dev --watch
 ````
-### Deploy Websocket server
-```shell
-$ cd dev/project/
-$ git clone git@github.com:alexfer/nodejs.git
-$ cd nodejs
-$ cp .env.dist .env # node configuration
-$ npm install
-````
-
 ### Build docker
 #### Run following commands and fill .env file:
 ````shell
@@ -46,12 +37,12 @@ psql -U postgres
 ````
 Next step:
 ````sql
-DROP ROLE IF EXISTS rgfly; -- optional
-CREATE USER rgfly WITH password 'rgfly';
-ALTER USER rgfly WITH SUPERUSER;
-ALTER USER rgfly CREATEDB;
-CREATE DATABASE rgfly OWNER rgfly;
-GRANT ALL PRIVILEGES ON DATABASE rgfly TO rgfly;
+DROP ROLE IF EXISTS inno; -- optional
+CREATE USER inno WITH password 'inno';
+ALTER USER inno WITH SUPERUSER;
+ALTER USER inno CREATEDB;
+CREATE DATABASE inno OWNER inno;
+GRANT ALL PRIVILEGES ON DATABASE inno TO inno;
 ````
 Deploy database:
 ````shell

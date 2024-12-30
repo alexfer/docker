@@ -1,4 +1,4 @@
-0 0 * * * /usr/local/bin/php /var/www/project/rgfly/bin/console app:cleanup >> /var/www/project/rgfly/var/log/cleanup.log 2>&1
-0 0 * * * /usr/local/bin/php /var/www/project/rgfly/bin/console app:backup_schedule >> /var/www/project/rgfly/var/log/backup.log 2>&1
-0 */6 * * * /usr/local/bin/php /var/www/project/rgfly/bin/console app:populate:indices:job >> /var/www/project/rgfly/var/log/populate-job.log 2>&1
+0 0 * * * /usr/local/bin/php /var/www/project/inno/bin/console app:cleanup >> /var/www/project/rgfly/var/log/cleanup.log 2>&1
+0 0 * * * /usr/local/bin/php /var/www/project/inno/bin/console app:backup_schedule >> /var/www/project/rgfly/var/log/backup.log 2>&1
+0 */6 * * * /usr/local/bin/php /var/www/project/inno/bin/console app:populate:indices:job >> /var/www/project/rgfly/var/log/populate-job.log 2>&1
 * * * * * cd /var/www/project/crm/connecto && php artisan schedule:run >> /dev/null 2>&1
