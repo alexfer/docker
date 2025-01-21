@@ -9,7 +9,7 @@ Creating and deploying postgres database
 ```shell
 $ cd dev/project/
 $ git clone git@github.com:alexfer/inno.git
-$ cd rgfly
+$ cd inno
 $ cp .env.dist .env # symfony configuration
 $ composer install
 $ npm install
@@ -47,8 +47,8 @@ GRANT ALL PRIVILEGES ON DATABASE inno TO inno;
 Deploy database:
 ````shell
 $ docker exec -it php bash
-$ cd projectdir
-$ rm -rfv src/Migrations/* # optional
+$ cd root_project_dir
+$ rm -rfv src/Migrations/* # optional (if migrations exists)
 $ php bin/console doctrine:database:drop --if-exists --force # optional
 $ php bin/console doctrine:database:create # optional
 $ php bin/console make:migration --no-interaction # optional (if migrations doesn't exists)
