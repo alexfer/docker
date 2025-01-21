@@ -22,7 +22,7 @@ $ cd docker
 ````
 #### Fill out .env file:
 ````shell
-$ cp .env.dist .env
+$ cp .env.dist .env # docker configuration
 $ docker-compose up -d --build
 ````
 ### Clear logs
@@ -47,11 +47,11 @@ GRANT ALL PRIVILEGES ON DATABASE inno TO inno;
 Deploy database:
 ````shell
 $ docker exec -it php bash
-$ cd rgfly
+$ cd projectdir
 $ rm -rfv src/Migrations/* # optional
 $ php bin/console doctrine:database:drop --if-exists --force # optional
 $ php bin/console doctrine:database:create # optional
-$ php bin/console make:migration --no-interaction # optional
+$ php bin/console make:migration --no-interaction # optional (if migrations doesn't exists)
 $ php bin/console doctrine:migrations:migrate --no-interaction
 $ php bin/console doctrine:fixtures:load --no-interaction
 $ php bin/console app:functions:import --no-interaction
