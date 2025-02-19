@@ -157,8 +157,28 @@ services:
             interval: 30s
             timeout: 10s
             retries: 3
+    mysql:
+        image: mysql:8.0.1
+        container_name: mysql
+        restart: unless-stopped
+        #command: ["mysqld", "--mysql-native-password=ON"]
+        ports:
+            - "3306:3306"
+            - "3307:3306"
+        networks:
+            - internal
+        depends_on:
+            - php
+        volumes:
+            - ./config/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+            - ./database/mysql:/var/lib/mysql
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        volumes_from:
+            - tmp
 volumes:
   pgdata:
+  mysql:
   mercure_data:
   mercure_config:
   tmp_data:
