@@ -166,7 +166,8 @@ services:
             - "3306:3306"
             - "3307:3306"
         networks:
-            - internal
+            - backend
+            - frontend
         depends_on:
             - php
         volumes:

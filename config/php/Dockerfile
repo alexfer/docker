@@ -14,6 +14,7 @@ RUN set -ex \
     imagemagick \
     libtool \
     curl \
+    tidyhtml-dev \
     wget \
     weasyprint \
     fontconfig \
@@ -21,7 +22,11 @@ RUN set -ex \
     bash \
     supervisor
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql opcache zip && docker-php-ext-enable pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql opcache zip \
+    && docker-php-ext-enable pdo_mysql
+
+RUN docker-php-ext-install tidy \
+    && docker-php-ext-enable tidy
 
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pgsql pdo_pgsql
