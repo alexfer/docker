@@ -2,9 +2,6 @@ FROM php:8.3-fpm-alpine
 
 RUN set -ex \
   && apk --no-cache add \
-    gcc \
-    make \
-    autoconf \
     busybox-extras \
     freetype-dev \
     libjpeg-turbo-dev \
@@ -31,9 +28,6 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql opcache zip \
 
 RUN docker-php-ext-install tidy \
     && docker-php-ext-enable tidy
-
-RUN pecl install memcached \
-    && docker-php-ext-enable memcached
 
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
     && docker-php-ext-install gd \
@@ -64,6 +58,8 @@ RUN set -eux; \
 RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
         && pecl install apcu \
         && docker-php-ext-enable apcu \
+        && pecl install memcached \
+        && docker-php-ext-enable memcached \
         && pecl install redis \
         && docker-php-ext-enable redis \
         && pecl clear-cache \
