@@ -2,6 +2,9 @@ FROM php:8.3-fpm-alpine
 
 RUN set -ex \
   && apk --no-cache add \
+    gcc \
+    make \
+    autoconf \
     busybox-extras \
     freetype-dev \
     libjpeg-turbo-dev \
@@ -15,6 +18,7 @@ RUN set -ex \
     libtool \
     curl \
     tidyhtml-dev \
+    libmemcached-dev \
     wget \
     weasyprint \
     fontconfig \
@@ -27,6 +31,13 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql opcache zip \
 
 RUN docker-php-ext-install tidy \
     && docker-php-ext-enable tidy
+
+RUN pecl install memcached \
+    && docker-php-ext-enable memcached
+
+RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
+    && docker-php-ext-install gd \
+    && docker-php-ext-enable gd
 
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pgsql pdo_pgsql
