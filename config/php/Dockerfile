@@ -26,6 +26,9 @@ RUN set -ex \
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache zip \
     && docker-php-ext-enable pdo_mysql
 
+RUN docker-php-ext-install calendar \
+    && docker-php-ext-enable calendar
+
 RUN docker-php-ext-install tidy \
     && docker-php-ext-enable tidy
 
@@ -39,9 +42,9 @@ RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
 RUN docker-php-ext-configure gd --enable-gd --with-webp --with-freetype --with-jpeg --with-xpm \
     && docker-php-ext-install gd
 
-RUN docker-php-ext-configure intl && docker-php-ext-install intl
-
-RUN docker-php-ext-enable intl
+RUN docker-php-ext-configure intl \
+    && docker-php-ext-install intl \
+    && docker-php-ext-enable intl
 
 RUN set -eux; \
 	apk add --no-cache imagemagick-dev; \
