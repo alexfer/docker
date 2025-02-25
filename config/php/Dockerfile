@@ -1,8 +1,9 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 RUN set -ex \
   && apk --no-cache add \
     busybox-extras \
+    git \
     freetype-dev \
     libjpeg-turbo-dev \
     libpng-dev \
@@ -10,8 +11,8 @@ RUN set -ex \
     libxpm-dev \
     postgresql-dev \
     libzip-dev \
-    graphicsmagick \
     imagemagick \
+    imagemagick-dev \
     libtool \
     curl \
     tidyhtml-dev \
@@ -46,27 +47,25 @@ RUN docker-php-ext-configure intl \
     && docker-php-ext-install intl \
     && docker-php-ext-enable intl
 
-RUN set -eux; \
-	apk add --no-cache imagemagick-dev; \
-	curl -fL -o imagick.tgz 'https://pecl.php.net/get/imagick-3.7.0.tgz'; \
-	echo '5a364354109029d224bcbb2e82e15b248be9b641227f45e63425c06531792d3e *imagick.tgz' | sha256sum -c -; \
-	tar --extract --directory /tmp --file imagick.tgz imagick-3.7.0; \
-	grep '^//#endif$' /tmp/imagick-3.7.0/Imagick.stub.php; \
-	test "$(grep -c '^//#endif$' /tmp/imagick-3.7.0/Imagick.stub.php)" = '1'; \
-	sed -i -e 's!^//#endif$!#endif!' /tmp/imagick-3.7.0/Imagick.stub.php; \
-	grep '^//#endif$' /tmp/imagick-3.7.0/Imagick.stub.php && exit 1 || :; \
-	docker-php-ext-install /tmp/imagick-3.7.0; \
-	rm -rf imagick.tgz /tmp/imagick-3.7.0
+#RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
+#    && cd /tmp && git clone --depth 1 https://github.com/Imagick/imagick.git && cd imagick \
+#    && sed -i 's/php_strtolower/zend_str_tolower/g' imagick.c \
+#    && phpize && ./configure && make && make install && ldconfig /usr/local/lib \
+#    && docker-php-ext-enable imagick
 
 RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
-        && pecl install apcu \
-        && docker-php-ext-enable apcu \
-        && pecl install memcached \
-        && docker-php-ext-enable memcached \
-        && pecl install redis \
-        && docker-php-ext-enable redis \
-        && pecl clear-cache \
-        && apk del .build-dependencies
+    && cd /tmp && git clone --depth 1 https://github.com/Imagick/imagick.git && cd imagick \
+    && sed -i 's/php_strtolower/zend_str_tolower/g' imagick.c \
+    && phpize && ./configure && make && make install && ldconfig /usr/local/lib \
+    && docker-php-ext-enable imagick \
+    && pecl install apcu \
+    && docker-php-ext-enable apcu \
+    && pecl install memcached \
+    && docker-php-ext-enable memcached \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && pecl clear-cache \
+    && apk del .build-dependencies
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
