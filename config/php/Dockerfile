@@ -47,12 +47,6 @@ RUN docker-php-ext-configure intl \
     && docker-php-ext-install intl \
     && docker-php-ext-enable intl
 
-#RUN apk add --no-cache --virtual .build-deps $PHPIZE_DEPS \
-#    && cd /tmp && git clone --depth 1 https://github.com/Imagick/imagick.git && cd imagick \
-#    && sed -i 's/php_strtolower/zend_str_tolower/g' imagick.c \
-#    && phpize && ./configure && make && make install && ldconfig /usr/local/lib \
-#    && docker-php-ext-enable imagick
-
 RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
     && cd /tmp && git clone --depth 1 https://github.com/Imagick/imagick.git && cd imagick \
     && sed -i 's/php_strtolower/zend_str_tolower/g' imagick.c \
@@ -60,8 +54,8 @@ RUN apk add --update --no-cache --virtual .build-dependencies $PHPIZE_DEPS \
     && docker-php-ext-enable imagick \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
-    && pecl install memcached \
-    && docker-php-ext-enable memcached \
+    && pecl install memcache \
+    && docker-php-ext-enable memcache \
     && pecl install redis \
     && docker-php-ext-enable redis \
     && pecl clear-cache \
