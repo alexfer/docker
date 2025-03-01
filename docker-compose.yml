@@ -14,6 +14,15 @@ services:
             - internal
         volumes:
             - /tmp/docker/
+    memcached:
+        image: memcached:alpine
+        container_name: memcached
+        ports:
+            - "11211:11211"
+        restart: always
+        command: ["memcached"]
+        networks:
+            - backend
     mercure:
         container_name: mercure
         image: dunglas/mercure
@@ -114,6 +123,7 @@ services:
         depends_on:
             - redis
             - postgres
+            - memcached
         volumes:
           - ./dev:/var/www
           - ./config/php/php.ini:/usr/local/etc/php/php.ini
